@@ -1,0 +1,54 @@
+<div class="admin-container" ng-controller="AdminCtrl">
+    <header>
+        <div class="admin-header-container">
+            <div class="headbar clearfix wrap">
+                <div class="logo">
+                    <p>discovery</p>
+                </div>
+                <div class="menu">
+                    <a href="#/admin">home</a>
+                    <button ng-click="logout()">Sign Out</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <div class="title-container">
+            <div class="title-section wrap">
+                <p>Instructor's Page</p>
+                <p>Create or edit lab</p>
+                <i class="fa fa-cogs"></i>
+                <button ng-click="createlab()">Create Lab</button>
+            </div>
+        </div>
+
+        <div class="labs-container wrap">
+            
+            <p ng-show="!labs.length" class="nolabsmsg">No Labs added..</p>
+            
+            <ul>
+                <li ng-repeat="lab in labs">
+                    <div class="lab-block">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="icon-section">
+                                    <i class="fa fa-flask"></i>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="content-section">
+                                    <p>{{lab.labname}}</p>
+                                    <button ng-click="editlab(lab.id)">Edit Lab</button>
+                                    <button ng-click="deletelab(lab)">Delete Lab</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

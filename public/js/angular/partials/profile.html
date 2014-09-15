@@ -1,0 +1,24 @@
+<div class="profile-container" ng-controller="ProfileCtrl">
+    <header>
+        <div class="profile-header-container">
+            <div class="wrap">
+                <div ng-include src="'/js/angular/partials/header.html'"></div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="content-container">
+        <div class="title-container">
+            <div class="title-section wrap">
+                <p>Profile</p>
+                <p>{{user.name}} <span>({{user.email}})</span></p>
+                <i class="fa fa-cogs"></i>
+            </div>
+        </div>
+        
+        <div class="profile-container wrap">
+            <p ng-hide="user.type" class="guestuser">Profile not available for Guest User..</p>
+        </div>
+        
+    </div>
+</div>

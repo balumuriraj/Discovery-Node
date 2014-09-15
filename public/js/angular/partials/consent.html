@@ -1,0 +1,18 @@
+<div class="consent-container" ng-controller="ConsentCtrl">
+    <div class="consent-block container">
+        <div class="row">
+            <div class="col-md-4">
+                <p class="icon-container"><i class="fa fa-flask"></i></p>
+            </div>
+            <div class="col-md-8">
+                <p>{{lab.labname}}</p>
+                <p>{{lab.labdescription}}</p>
+                <br>
+                <p>Terms and conditions:</p>
+                <p><span>*</span> We will be collecting data through the games that may result in publications and will definitely help us assess student learning and improve future iterations of the course.</p>
+                <button ng-click="startLab(lab.id)">I Accept the terms and conditions</button>
+            </div>
+        </div>
+        
+    </div>
+</div>

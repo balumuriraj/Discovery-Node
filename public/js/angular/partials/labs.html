@@ -1,0 +1,54 @@
+<div ng-include src="'/js/angular/partials/header.html'"></div>
+
+<div class="labs-container" ng-controller="LabsCtrl">
+    <div class="container-fluid">
+        <div class="title-container">
+            <div class="title-section wrap">
+                <p class="home-title"><span>Discovery</span> Lab</p>
+                <p class="home-subtitle hidden-xs hidden-sm">An interactive Lab with numerous questions that helps honing the skills of the students</p>
+                <img src="/img/svg/discovery-home.svg" class="hidden-xs hidden-sm" />
+            </div>
+        </div>
+
+        <div class="lab-list">
+            <ul>
+                <li ng-repeat="lab in labs">
+                    <div class="lab-block">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 hidden-xs">
+                                <div class="icon-section">
+                                    <i class="fa fa-flask"></i>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-8 col-md-8">
+                                <div class="content-section">
+                                    <p>{{lab.labname}}</p>
+                                    <p>{{lab.labdescription}}</p>
+                                    <button ng-click="startLab(lab.id)">Start Lab</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    
+    <footer>
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>© 2014 Discovery, Inc.</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <a href="">Privacy</a>
+                    <a href="">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>

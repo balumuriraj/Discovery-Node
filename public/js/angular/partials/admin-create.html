@@ -1,0 +1,143 @@
+<div class="admin-container" ng-controller="AdminCreateCtrl">
+    <header>
+        <div class="admin-header-container">
+            <div class="headbar clearfix wrap">
+                <div class="logo">
+                    <p>discovery</p>
+                </div>
+                <div class="menu">
+                    <a href="#/admin">home</a>
+                    <button ng-click="logout()">Sign Out</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <div class="title-container">
+            <div class="title-section wrap">
+                <p>Instructor's Page</p>
+                <p>enter the question and answers for labs</p>
+                <i class="fa fa-cogs"></i>
+            </div>
+        </div>
+
+        <div class="lab-questions-container wrap">
+            <form name="saveLabForm" novalidate>
+                <input type="text" ng-class="{ 'field-error' : saveLabForm.labname.$error.required && !saveLabForm.labname.$pristine }" name ="labname" placeholder="Enter Lab Name" class="labname" ng-model="lab.labname" required  />
+                <button ng-click="addQuestion()" class="addquesbttn">Add Question</button>
+                <br><br>
+                <textarea ng-class="{ 'field-error' : saveLabForm.labdescription.$error.required && !saveLabForm.labdescription.$pristine }" name ="labdescription" ng-model="lab.labdescription" placeholder="Enter Lab description" class="labdescription" required />
+
+                <div class="saved-questions" ng-repeat="savedques in lab.labquestions track by $index">
+                    <p>{{$index+1}}. {{savedques.question}} <span ng-click="deleteSavedQuestion(savedques)"> delete </span> <span ng-click="editQuestion(savedques)"> edit </span></p>
+                </div>
+
+                <div class="question-section" ng-show="editquestion != null">
+                    <form name="editQuesForm" novalidate>
+                        <div class="question-block">
+                            <p>Question details</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <textarea ng-class="{ 'field-error' : editQuesForm.question.$error.required && !editQuesForm.question.$pristine }" name ="question" ng-model="editquestion.question" placeholder="Question" required />
+                                    <input type="text" ng-class="{ 'field-error' : editQuesForm.imagepath.$error.required && !editQuesForm.imagepath.$pristine }" name ="imagepath" ng-model="editquestion.imagepath" placeholder="Image path" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea ng-class="{ 'field-error' : editQuesForm.description.$error.required && !editQuesForm.description.$pristine }" name ="description" ng-model="editquestion.description" placeholder="Description" required />
+                                    <input type="text" ng-class="{ 'field-error' : editQuesForm.hint.$error.required && !editQuesForm.hint.$pristine }" name ="hint" ng-model="editquestion.hint" placeholder="Hint" required />
+                                </div>
+                            </div>                  
+                        </div>
+
+                        <div class="question-block" ng-repeat="subquestion in editquestion.subquestions track by $index">
+                            <ng-form name="userFieldForm">
+                                <p><span>Sub question details</span> <strong ng-click="deleteSubQuestion(editquestion, subquestion)">delete</strong></p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" ng-class="{ 'field-error' : userFieldForm.subquestion.$error.required && !userFieldForm.subquestion.$pristine }" name ="subquestion" placeholder="Sub Question" ng-model="subquestion.subquestion" required />
+                                        <input type="text" ng-class="{ 'field-error' : userFieldForm.correctanswer.$error.required && !userFieldForm.correctanswer.$pristine }" name ="correctanswer" placeholder="Correct Answer" ng-model="subquestion.correctanswer" required />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select ng-model="subquestion.optiontype" ng-options="optiontype for optiontype in optiontypes" ng-change="addChoice(subquestion, subquestion.optiontype)" ng-class="{ 'field-error' : userFieldForm.optiontype.$error.required && !userFieldForm.optiontype.$pristine }" name ="optiontype" required>
+                                            <option value="">Select sub-question type</option>
+                                        </select>
+                                        <input type="number" ng-class="{ 'field-error' : userFieldForm.answerrange.$error.required && !userFieldForm.answerrange.$pristine || userFieldForm.answerrange.$error.min }" name ="answerrange" placeholder="Answer Range"  ng-model="subquestion.answerrange" min="0" required />
+                                    </div>
+                                </div> 
+                                <p ng-show="subquestion.optiontype == 'RANGE'"><span>Enter Min and Max values for RANGE respectively</span></p>
+                                <p ng-show="subquestion.optiontype == 'CHOICE'"><span>Enter 4 options for CHOICE respectively</span></p>
+                                <p ng-show="subquestion.optiontype == 'DRAGDROP'"><span>Enter 4 options for DRAGDROP respectively</span></p>
+                                <div class="row">
+                                    <div class="col-md-3" ng-repeat="option in subquestion.options track by $index">
+                                        <ng-form name="userFieldOptionsForm">
+                                            <input type="text" ng-class="{ 'field-error' : userFieldOptionsForm.option.$error.required && !userFieldOptionsForm.option.$pristine }" name ="option" placeholder="Enter option"  ng-model="subquestion.options[$index]" required />
+                                        </ng-form>
+                                    </div>
+                                </div>
+                            </ng-form>
+                        </div>
+
+                        <div class="button-section">
+                            <button ng-click="addSubQuestion(editquestion)">Add Sub Question</button>
+                            <button ng-click="deleteSavedQuestion(editquestion)">delete</button>
+                            <button ng-click="saveEditQuestion()" ng-disabled="editQuesForm.$invalid">save</button>
+                        </div>
+                    </form>                
+                </div>
+
+                <div class="question-section" ng-repeat="question in questions track by $index">
+                    <form name="addQuesForm" novalidate>
+                        <div class="question-block">
+                            <p>Please enter question details</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <textarea ng-class="{ 'field-error' : addQuesForm.question.$error.required && !addQuesForm.question.$pristine }" name ="question" ng-model="question.question" placeholder="Question" required />
+                                    <input type="text" ng-class="{ 'field-error' : addQuesForm.imagepath.$error.required && !addQuesForm.imagepath.$pristine }" name ="imagepath" ng-model="question.imagepath" placeholder="Image path" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea ng-class="{ 'field-error' : addQuesForm.description.$error.required && !addQuesForm.description.$pristine }" name ="description" ng-model="question.description" placeholder="Description" required />
+                                    <input type="text" ng-class="{ 'field-error' : addQuesForm.hint.$error.required && !addQuesForm.hint.$pristine }" name ="hint" ng-model="question.hint" placeholder="Hint" required />
+                                </div>
+                            </div>                  
+                        </div>
+
+                        <div class="question-block" ng-repeat="subquestion in question.subquestions track by $index">
+                            <ng-form name="userFieldForm">
+                                <p><span>Please enter sub question details</span> <strong ng-click="deleteSubQuestion(question, subquestion)">delete</strong></p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" ng-class="{ 'field-error' : userFieldForm.subquestion.$error.required && !userFieldForm.subquestion.$pristine }" name ="subquestion" placeholder="Sub Question" ng-model="subquestion.subquestion" required />
+                                        <input type="text" ng-class="{ 'field-error' : userFieldForm.correctanswer.$error.required && !userFieldForm.correctanswer.$pristine }" name ="correctanswer" placeholder="Correct Answer" ng-model="subquestion.correctanswer" required />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select ng-model="subquestion.optiontype" ng-options="optiontype for optiontype in optiontypes" ng-change="addChoice(subquestion, subquestion.optiontype)" ng-class="{ 'field-error' : userFieldForm.optiontype.$error.required && !userFieldForm.optiontype.$pristine }" name ="optiontype" required>
+                                            <option value="">Select sub-question type</option>
+                                        </select>
+                                        <input type="number" ng-class="{ 'field-error' : userFieldForm.answerrange.$error.required && !userFieldForm.answerrange.$pristine || userFieldForm.answerrange.$error.min }" name ="answerrange" placeholder="Answer Range"  ng-model="subquestion.answerrange" min="0" required />
+                                    </div>
+                                </div> 
+                                <p ng-show="subquestion.optiontype == 'RANGE'"><span>Enter Min and Max values for RANGE respectively</span></p>
+                                <p ng-show="subquestion.optiontype == 'CHOICE'"><span>Enter 4 options for CHOICE respectively</span></p>
+                                <p ng-show="subquestion.optiontype == 'DRAGDROP'"><span>Enter 4 options for DRAGDROP respectively</span></p>
+                                <div class="row">
+                                    <div class="col-md-3" ng-repeat="option in subquestion.options track by $index">
+                                        <ng-form name="userFieldOptionsForm">
+                                            <input type="text" ng-class="{ 'field-error' : userFieldOptionsForm.option.$error.required && !userFieldOptionsForm.option.$pristine }" name ="option" placeholder="Enter option"  ng-model="subquestion.options[$index]" required />
+                                        </ng-form>
+                                    </div>
+                                </div>
+                            </ng-form>
+                        </div>
+
+                        <div class="button-section">
+                            <button ng-click="addSubQuestion(question)">Add Sub Question</button>
+                            <button ng-click="deleteQuestion(question)">delete</button>
+                            <button ng-click="savequestion(question)" ng-disabled="addQuesForm.$invalid">save</button>
+                        </div>
+                    </form>
+                </div>
+                <button class="savelab" ng-click="saveLab()">SAVE LAB</button> 
+            </form>
+        </div>
+    </div>
+</div>
