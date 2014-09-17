@@ -30,20 +30,12 @@
             <ul>
                 <li ng-repeat="lab in labs">
                     <div class="lab-block">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="icon-section">
-                                    <i class="fa fa-flask"></i>
-                                </div>
-                            </div>
-
-                            <div class="col-md-8">
-                                <div class="content-section">
-                                    <p>{{lab.labname}}</p>
-                                    <button ng-click="editlab(lab.id)">Edit Lab</button>
-                                    <button ng-click="deletelab(lab)">Delete Lab</button>
-                                </div>
-                            </div>
+                        
+                        <div class="content-section">
+                            <p>{{lab.labname}}</p>
+                            <p>{{lab.labdescription}}</p>
+                            <button ng-click="editlab(lab.id)">Edit Lab</button>
+                            <button ng-click="deletelab(lab)">Delete Lab</button>
                         </div>
 
                     </div>

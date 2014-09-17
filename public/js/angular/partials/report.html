@@ -1,17 +1,48 @@
-<div ng-controller="reportCtrl">
+<div class="report-container" ng-controller="ReportCtrl">
     <header>
-        <div class="headbar clearfix">
-            <div class="logo">
-                <p>Discovery</p>
-            </div>
-            <div class="menu hidden-xs">
-                <a href="#/labs">home</a>
-                <a href="#/profile">profile</a>
-                <button ng-click="logout()">Sign Out</button>
-            </div>
-            <div class="mobile-menu visible-xs">
-                <i class="fa fa-bars"></i>
+        <div class="report-header-container">
+            <div class="wrap">
+                <div ng-include src="'/js/angular/partials/header.html'"></div>
             </div>
         </div>
     </header>
+    
+    <div class="content-container">
+        <div class="title-container">
+            <div class="title-section wrap">
+                <p>Report</p>
+                <p>{{user.name}} <span>({{user.email}})</span></p>
+                <i class="fa fa-cogs"></i>
+            </div>
+        </div>
+        
+        <div class="report-container wrap">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Quiz Name: </p>
+                                <p>Score: </p>
+                                <p>Time Taken: </p>
+                                <p>Taken on: </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Estimating Order of Magnitude</p>
+                                <p>50.6 </p>
+                                <p>10:12</p>
+                                <p>18 Sept, 2014</p>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="donut-container">
+                            <donut></donut>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
 </div>

@@ -17,7 +17,8 @@ var app = angular
     'ngSanitize',
     'ngTouch',
     'ngDraggable',
-    'ngTimer'
+    'ngTimer',
+    'ngd3'
   ]);
 
 app.config(function ($routeProvider) {

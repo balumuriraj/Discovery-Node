@@ -8,12 +8,12 @@
  * Controller of the discoveryApp
  */
 
-app.controller('ReportCtrl', ['$scope', '$location', 'userFactory',
-    function ($scope, $location, userFactory) {
-
-        $scope.logout = function () {
-            userFactory.logout();
-            $location.path('/');
-        }
-
+app.controller('ReportCtrl', ['$scope', 'userFactory', function ($scope, userFactory) {
+    userFactory.getUser()
+        .success(function(responsedata){
+            $scope.user = responsedata;
+        })
+        .error(function(data) {
+            alert("Please try again");
+        });
 }]);

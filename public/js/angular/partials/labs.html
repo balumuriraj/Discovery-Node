@@ -14,22 +14,11 @@
             <ul>
                 <li ng-repeat="lab in labs">
                     <div class="lab-block">
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 hidden-xs">
-                                <div class="icon-section">
-                                    <i class="fa fa-flask"></i>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-8 col-md-8">
-                                <div class="content-section">
-                                    <p>{{lab.labname}}</p>
-                                    <p>{{lab.labdescription}}</p>
-                                    <button ng-click="startLab(lab.id)">Start Lab</button>
-                                </div>
-                            </div>
+                        <div class="content-section">
+                            <p>{{lab.labname}}</p>
+                            <p>{{lab.labdescription}}</p>
+                            <button ng-click="startLab(lab.id)">Start Lab</button>
                         </div>
-
                     </div>
                 </li>
             </ul>
