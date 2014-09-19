@@ -22,6 +22,22 @@ app.factory('quizFactory', ['$http', '$cookieStore', function($http, $cookieStor
             .error(function(data) {
                 console.log("Submit Answer failed..");
             });
+        },
+        
+        getReport: function(id){
+            return $http({
+                url: baseUrl + '/getReport/' + id,
+                method: "GET"
+            })
+            .success(function(responseData) {
+                console.log("Got Report ..");
+                return responseData;
+            })
+            .error(function(data) {
+                console.log("Get Report failed..");
+            });
         }
     };
+    
+    
 }]);

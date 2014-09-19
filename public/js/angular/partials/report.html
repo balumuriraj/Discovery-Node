@@ -20,24 +20,50 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Quiz Name: </p>
-                                <p>Score: </p>
-                                <p>Time Taken: </p>
-                                <p>Taken on: </p>
+                        <div class="row report-table">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="report-table-title">
+                                    <p>Quiz Name: </p>
+                                    <p>Score: </p>
+                                    <p>Time Taken: </p>
+                                    <p>Taken on: </p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>Estimating Order of Magnitude</p>
-                                <p>50.6 </p>
-                                <p>10:12</p>
-                                <p>18 Sept, 2014</p>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <div class="report-table-answer">
+                                    <p>{{lab.labname}}</p>
+                                    <p>{{report.score}} </p>
+                                    <p>{{report.clock}} seconds</p>
+                                    <p>{{report.date | date}}</p>
+                                </div>
                             </div>
                         </div>                        
                     </div>
                     <div class="col-md-4">
-                        <div class="donut-container">
-                            <donut></donut>
+                        <p class="message">Well Done!</p>
+                    </div>
+                </div>
+                
+                <br>
+                <hr>
+                
+                <div class="row stats-container">
+                    <div class="col-md-4 col-sm-4">
+                        <p>ATTEMPTED</p>
+                        <div class="donut-container">                            
+                            <donut val="attempted"></donut>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <p>SCORE</p>
+                        <div class="donut-container">                            
+                            <donut val="score"></donut>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <p>AVG TIME</p>
+                        <div class="donut-container">                            
+                            <donut val="time"></donut>
                         </div>
                     </div>
                 </div>
