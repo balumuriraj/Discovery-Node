@@ -4,12 +4,18 @@ angular.module("ngTimer", [])
 
             function link(scope, element, attrs) {
                 var timeoutId,
-                    seconds = scope.useranswer.clock;
+                    seconds;
+                
+                seconds = $cookieStore.get('timer');
+                if(seconds == null)
+                {
+                    seconds = 0;
+                } 
 
                 function updateTime() {
                     seconds++;
                     element.text(pad(parseInt(seconds / 60)) +":" + pad(seconds % 60));
-                    scope.useranswer.clock = seconds;
+                    scope.val = seconds;
                     $cookieStore.put('timer', seconds);
                 }
                 
@@ -36,6 +42,7 @@ angular.module("ngTimer", [])
 
             return {
                 restrict: 'EA', //E = element, A = attribute, C = class, M = comment   
+                scope: {val: '='  },
                 link: link
             };
 

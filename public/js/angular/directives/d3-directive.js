@@ -5,9 +5,6 @@
 angular.module("ngd3", [])
     .directive('donut', ['$timeout', function(timer) {
     
-    // constants
-    var data = [10, 50, 80];
-    
     var $container = $('.donut-container'),
         angle = 2 * Math.PI;
     
@@ -25,8 +22,6 @@ angular.module("ngd3", [])
             val: '='  
         },
         link: function(scope, element, attrs) {
-            
-            
             
             var svgfun = function(){
                 

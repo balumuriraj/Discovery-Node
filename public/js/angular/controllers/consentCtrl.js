@@ -8,8 +8,8 @@
  * Controller of the discoveryApp
  */
 
-app.controller('ConsentCtrl', ['$scope', '$location', '$routeParams', '$cookieStore', 'labsFactory',
-    function ($scope, $location, $routeParams, $cookieStore, labsFactory) {
+app.controller('ConsentCtrl', ['$scope', '$q', '$location', '$routeParams', '$cookieStore', 'labsFactory', 'userFactory', 'quizFactory',
+    function ($scope, $q, $location, $routeParams, $cookieStore, labsFactory, userFactory, quizFactory) {
         
         function init(){
             console.log("Id is " + $routeParams.id);            
@@ -22,16 +22,41 @@ app.controller('ConsentCtrl', ['$scope', '$location', '$routeParams', '$cookieSt
                 .error(function(data) {
                     alert("Please try again");
                 });
+            
+            userFactory.getUser()
+                .success(function(responsedata){
+                    $scope.user = responsedata;
+                })
+                .error(function(data) {
+                    alert("Please try again");
+                });
 
         };
         
         init();
         
-        $scope.startLab = function(id){
+        $scope.startLab = function(labid, userid){   
+            var id;
+            var deferred = $q.defer();
+            var promise = deferred.promise;
             
-            $cookieStore.put('timer', 0);
+            promise.then(function(result){                           
+                $location.path('/lab/'+id);
+            }, function(reason){
             
-            $location.path('/lab/'+id);
+            });
+            
+            quizFactory.createUserAnswerDoc(labid, userid)
+                .success(function(responsedata) {
+                    console.log("Got new attempt: " + responsedata.id);
+                    id = responsedata.id;
+                    $cookieStore.put('timer', 0); 
+                    deferred.resolve('success'); 
+                })
+                .error(function(responsedata) {
+                    deferred.reject('failure'); 
+                })
+            
         }
 
 }]);

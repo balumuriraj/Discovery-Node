@@ -24,6 +24,7 @@
                             <div class="col-md-4 col-sm-4 col-xs-4">
                                 <div class="report-table-title">
                                     <p>Quiz Name: </p>
+                                    <p>Current Attempt: </p>
                                     <p>Score: </p>
                                     <p>Time Taken: </p>
                                     <p>Taken on: </p>
@@ -32,9 +33,10 @@
                             <div class="col-md-8 col-sm-8 col-xs-8">
                                 <div class="report-table-answer">
                                     <p>{{lab.labname}}</p>
-                                    <p>{{report.score}} </p>
-                                    <p>{{report.clock}} seconds</p>
-                                    <p>{{report.date | date}}</p>
+                                    <p>{{attemptcount+1}}</p>
+                                    <p>{{report.attempts[attemptcount].score | number : 2}} </p>
+                                    <p>{{report.attempts[attemptcount].clock/60 | number : 0}} Minutes {{report.attempts[attemptcount].clock % 60}} Seconds</p>
+                                    <p>{{report.attempts[attemptcount].date | date}}</p>
                                 </div>
                             </div>
                         </div>                        
@@ -50,18 +52,21 @@
                 <div class="row stats-container">
                     <div class="col-md-4 col-sm-4">
                         <p>ATTEMPTED</p>
+                        <p>(out of {{report.attempts[attemptcount].answers.length}})</p>
                         <div class="donut-container">                            
                             <donut val="attempted"></donut>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <p>SCORE</p>
+                        <p>(out of {{report.attempts[attemptcount].answers.length*10}})</p>
                         <div class="donut-container">                            
                             <donut val="score"></donut>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <p>AVG TIME</p>
+                        <p>(in Minutes)</p>
                         <div class="donut-container">                            
                             <donut val="time"></donut>
                         </div>

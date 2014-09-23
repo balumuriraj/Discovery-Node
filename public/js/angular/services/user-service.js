@@ -5,7 +5,7 @@
 
 app.factory('userFactory', ['$http', '$cookieStore', function($http, $cookieStore) {
     var baseUrl = "http://localhost:8080/Discoveryapi";
-    //var baseUrl = "http://discovery.a2c2.asu.edu/:9090/";
+    //var baseUrl = "http://discovery.a2c2.asu.edu:9090";
     
     return {
         guestUserLogin: function(user){

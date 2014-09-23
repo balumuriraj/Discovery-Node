@@ -752,18 +752,23 @@ color: #fff;
                 text-align: center;
                 font-weight: bold;
                 font-size: 4em;
-                padding-top: 1em;
+                padding-top: 1.5em;
             }
             
             .stats-container{
                 padding: 2em;
                 text-align: center;
                 
-                p{
+                p:first-child{
                     font-size: 1.5em;
                     color: #999;
                     font-weight: bold;
-                    padding: 1em;
+                    padding-top: 1em;
+                }
+                
+                p:nth-child(2){
+                    font-size: 1em;
+                    color: #ccc;
                 }
                 
                 .donut-container{                    
@@ -893,7 +898,7 @@ color: #fff;
                 border-radius: 5px;
             }   
             
-            button{
+            .submit-button{
                 .basic-button(); 
                 background: @greencolor;
                 width: 100%;
@@ -901,25 +906,26 @@ color: #fff;
                 padding: 0.75em 0;
             }
             
-            button:active{
+            .submit-button:active{
                 position: relative;
                 top: 2px;
             }
-        }
+        }    
         
         .question-block{
             padding: 2em 3em;
-            background: @maincolor;
-            color: #fff;
+            background: @maincolor;            
             border-radius: 0 0 5px 5px;
             
             p:first-child{
+                color: #fff;
                 margin: 0;
                 font-size: 1.5em;
                 opacity: 0.8;
             }
             
             p:nth-child(2){
+                color: #fff;
                 margin: 0;
                 padding: 0.5em 0;
                 font-size: 2em;
@@ -927,12 +933,13 @@ color: #fff;
             }
             
             p:nth-child(3){
+                color: #fff;
                 margin: 0;
                 font-size: 1.25em;
                 opacity: 0.8;
             }
             
-            button{
+            .hint-button{
                 .basic-button();
                 opacity: 0.7;
                 background: #fff;
@@ -940,7 +947,7 @@ color: #fff;
                 margin-bottom: 2em;
             }
             
-            button:active{
+            .hint-button:active{
                 position: relative;
                 top: 2px;
             }
@@ -950,6 +957,18 @@ color: #fff;
                     width: 100%;                    
                 }
             }
+        }
+    }
+    
+    .error-block{
+        padding: 1em;
+        background: @redcolor;
+        border-radius: 5px;
+
+        p{
+            margin: 0;
+            font-weight: bold;
+            color: #fff;
         }
     }
     
@@ -989,6 +1008,18 @@ color: #fff;
                     padding: 0.25em;
                 }
             }
+            
+            .mobile-submit-block{
+                padding: 1em;
+                
+                .submit-button {
+                    .basic-button();
+                    background: @greencolor;
+                    width: 100%;
+                    font-size: 1.25em;
+                    padding: 0.75em 0;
+                }
+            }
         }
     }
     
@@ -997,7 +1028,7 @@ color: #fff;
         margin-bottom: 1.5em;
         border: 1px solid #ddd;
         .one-edge-shadow();
-        
+
         .sub-question-block{
             background: #fff;
             padding: 2em;
@@ -1081,6 +1112,7 @@ color: #fff;
                 margin: 0;
                 background: #fff;
                 color: #8a97a0;
+                border: 1px solid #ddd;
                 border-radius: 3px;
                 -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
                 -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
@@ -1171,28 +1203,27 @@ color: #fff;
 }
 
 /**** Bootstrap custom ****/
-
 .modal-header{
-    background: @maincolor;   
-    border-radius: 5px 5px 0 0;
 }
 
 .modal-title{
-    color: #fff;   
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: bold;
+    color:#777;
 }
 
 .modal-body{
 	color: #999;
 	font-size: 1.5em;
-    padding: 2em;
+    padding: 1em;
 }
 
 .modal-footer {
-	background: #eee;
-    border-radius: 0 0 5px 5px ;
+    button {
+        font-size: 1.15em;   
+    }
 }
+
 
 /**** Error PAge ****/
 

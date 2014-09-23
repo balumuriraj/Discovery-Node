@@ -8,107 +8,102 @@
  * Controller of the discoveryApp
  */
 
-app.controller('QuizCtrl', ['$scope', '$routeParams', '$cookieStore', '$location', 'labsFactory', 'userFactory', 'quizFactory', function ($scope, $routeParams, $cookieStore, $location, labsFactory, userFactory, quizFactory) {
+app.controller('QuizCtrl', ['$scope', '$q', '$routeParams', '$cookieStore', '$location', 'labsFactory', 'userFactory', 'quizFactory', function ($scope, $q, $routeParams, $cookieStore, $location, labsFactory, userFactory, quizFactory) {
     
-    $scope.useranswer = {
-        "id": "",
-        "userid": "",
-        "labid": "",
-        "currentquestion": "",
-        "score": "",
-        "clock": "",
-        "submitstatus": "",
-        "answers": [] 
-    };
-    
-    $scope.emptyAnswer = {
-        "id": "",        
-        "subanswers": []
-    };
-    
-    $scope.emptySubAnswer = {
-        "id": "",
-        "subanswer": ""
-    };
+    $scope.useranswer;
+    $scope.errors = false;     
+    $scope.attemptcount;        
+    $scope.currentquestion;
                             
     function init(){
-        console.log("Id is " + $routeParams.id);            
+        console.log("Doc Id is " + $routeParams.id);            
         var id = $routeParams.id;
+        
+        var deferred = $q.defer();
+        var promise = deferred.promise;
 
-        userFactory.getUser()
+        promise.then(function(result){
+            
+            $scope.attemptcount = $scope.useranswer.attempts.length - 1;            
+            $scope.currentquestion = $scope.useranswer.attempts[$scope.attemptcount].currentquestion;       
+            
+            labsFactory.getLab($scope.useranswer.labid)
+                .success(function(responsedata){
+                    $scope.lab = responsedata;                    
+                })
+                .error(function(data) {
+                    alert("Please try again");
+                });
+        }, function(reason){
+            
+        });
+
+        quizFactory.getUserAnswerDoc(id)
             .success(function(responsedata){
-                $scope.user = responsedata;
-                
-                labsFactory.getLab(id)
-                    .success(function(responsedata){
-                        $scope.lab = responsedata;
-                        
-                        $scope.useranswer.userid = $scope.user.id;
-                        $scope.useranswer.labid = id;
-                        $scope.useranswer.currentquestion = 0;
-                        $scope.useranswer.score = 0;
-                        
-                        for(var i=0; i<$scope.lab.labquestions.length; i++)
-                        {
-                            var newanswer = angular.copy($scope.emptyAnswer);
-                            newanswer.id = i+1;
-                            
-                            for(var j=0; j<$scope.lab.labquestions[i].subquestions.length; j++)
-                            {
-                                var newsubanswer = angular.copy($scope.emptySubAnswer);
-                                newsubanswer.id = j+1;
-                                newsubanswer.subanswer = "";
-
-                                newanswer.subanswers.push(newsubanswer);
-                            }
-
-                            $scope.useranswer.answers.push(newanswer);
-                        }
-                        
-                    })
-                    .error(function(data) {
-                        alert("Please try again");
-                    });
+                $scope.useranswer = responsedata;
+                deferred.resolve('success'); 
             })
             .error(function(data) {
                 alert("Please try again");
             });
-        
-        var timer = $cookieStore.get('timer');
-        if(timer == null)
-        {
-            timer = 0;
-        } 
-        
-        $scope.useranswer.clock = timer;
         
     };
         
     init();
 
     $scope.onDropComplete=function(data,evt,ques,index){        
-        $scope.useranswer.answers[ques].subanswers[index].subanswer = data;
+        $scope.useranswer.attempts[$scope.attemptcount].answers[ques].subanswers[index].subanswer = data;
     }
     
-    $scope.submitAnswer = function(useranswer) {        
+    $scope.submitAnswer = function(useranswer) {   
         
-        quizFactory.submitAnswer(useranswer)
-            .success(function(responsedata){
-                var currentques = responsedata.currentquestion;
-                
-                console.log("Current Ques: "+ currentques);
-                
-                if(currentques == responsedata.answers.length){
-                    console.log("Removing timer..");
-                    $cookieStore.remove('timer');
-                    $location.path('/report/'+responsedata.id);
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+
+        promise.then(function(result){
+            
+            //validation
+            var testanswer = useranswer.attempts[$scope.attemptcount].answers[$scope.currentquestion].subanswers;
+            var flag = true;
+            
+            for(var i=0; i < testanswer.length; i++){
+                console.log(i + ": " + testanswer[i].subanswer);
+                if(testanswer[i].subanswer == ""){
+                    flag = false;
                 }
-                
-                $scope.useranswer = responsedata;
-            })
-            .error(function(data) {
-                alert("Please try again");
-            });
+            }
+            
+            if(flag){                
+                quizFactory.submitAnswer(useranswer)
+                    .success(function(responsedata){
+                        $scope.useranswer = responsedata;
+                        $scope.errors = false; 
+                        $scope.attemptcount = $scope.useranswer.attempts.length - 1;            
+                        $scope.currentquestion = $scope.useranswer.attempts[$scope.attemptcount].currentquestion; 
+                    
+                        if($scope.currentquestion == $scope.useranswer.attempts[$scope.attemptcount].answers.length){
+                            console.log("Removing timer..");
+                            $cookieStore.remove('timer');
+                            $location.path('/report/'+responsedata.id);
+                        }
+                        
+                    })
+                    .error(function(data) {
+                        alert("Please try again");
+                    });
+            } else{
+                $scope.errors = true; 
+            }
+            
+        }, function(reason){
+            
+        });
+        
+        
+        $('#submitModal').modal('hide');        
+        $('#submitModal').on('hidden.bs.modal', function () {
+            deferred.resolve('success'); 
+        })
     }
 
     
