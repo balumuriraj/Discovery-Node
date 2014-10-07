@@ -41,7 +41,7 @@ app.controller('HomeCtrl', ['$scope', '$routeParams', '$location', '$window', 'u
         else{
             $scope.showasu = false;    
             $scope.asuuser = {userid: '', password: ''};
-            $scope.asuForm.$setPristine();
+            //$scope.asuForm.$setPristine();
             $scope.loading = false;
             $scope.serviceerror = false;
         }

@@ -15,9 +15,56 @@
                 <i class="fa fa-cogs"></i>
             </div>
         </div>
-        
-        <div class="profile-container wrap">
+
+        <div class="profile-data-container wrap">
             <p ng-hide="user.type" class="guestuser">Profile not available for Guest User..</p>
+        
+            <div ng-show="user.type" class="container-fluid"> 
+                
+                <div class="row">
+                    <div class="lab-block" ng-repeat="report in reports">
+                        <p class="title" ng-repeat="lab in labs | filter:report.labid">{{lab.labname}}</p>
+                        <div class="attempt-block" ng-repeat="attempt in report.attempts">  
+                            <div class="col-md-8">
+                                <p>Attempt {{$index+1}}</p>
+                                <p>{{attempt.date | date}}</p>
+                            </div>
+                            <div class="col-md-4 score-block">
+                                <p>{{attempt.score | number : 2}}</p>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                
+                <!--
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="details-box">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Lab Name</td>
+                                        <td>Attempt</td>
+                                        <td>Date</td>
+                                        <td>Score</td>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="report in reports">
+                                    <tr ng-repeat="attempt in report.attempts">
+                                        <td>{{$parent.$index+1}}.{{$index+1}}</td>
+                                        <td ng-repeat="lab in labs | filter:report.labid">{{lab.labname}}</td>
+                                        <td>{{$index+1}}</td>
+                                        <td>{{attempt.date | date}}</td>
+                                        <td>{{attempt.score}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                -->
+            </div>
         </div>
         
     </div>

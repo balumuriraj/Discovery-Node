@@ -281,15 +281,18 @@ color: #fff;
                 .login-form {
                     
                     .cas-login{
-                        background: #eee;
-                        padding: 3em;
+                        margin-top: 0.5em;
+                        background: #fff;
+                        border: 1px solid #ddd;
+                        padding: 2em;
                         text-align: center;
+                        word-wrap: break-word;
                         
                         p{
                             margin: 0;
                             font-size: 2em;
                             font-weight: bold;
-                            padding-bottom: 1em
+                            padding-bottom: 1em;
                         }
                         
                         button{
@@ -690,7 +693,7 @@ color: #fff;
             .wrap-title-container();
         }
         
-        .profile-container{
+        .profile-data-container{
             position: relative;
             top: -4em;
             background: #fff;
@@ -704,6 +707,62 @@ color: #fff;
                 text-align: center;
                 padding: 2em 0;
                 color: #999;
+            }
+            
+            .stat-box{
+                border: 1px solid #ddd;
+                text-align: center;
+                border-radius: 4px;
+                
+                p{
+                    margin: 0;
+                    padding: 1em;
+                    font-size: 2em;
+                    font-weight: bold;
+                    color: #777;
+                }
+            }
+            
+            .lab-block{
+                margin: 1em;
+                .title{
+                    font-size: 1.5em;
+                    margin: 0;
+                    font-weight: bold;
+                }
+                .attempt-block{
+                    border: 1px solid #ddd;   
+                    width: 20em;
+                    display: inline-block;
+                    padding: 2em;
+                    margin: 1em 1em 1em 0;
+
+                    p{
+                        margin: 0;
+                        font-size: 1.25em;
+                        color: #555;
+                    }
+                    
+                    p:nth-child(1){
+                        font-size: 0.95em;
+                    }
+                    
+                    .score-block{
+                        border-left: 1px solid #ddd;
+                        text-align: center;
+                        p{
+                            vertical-align: middle;
+                            font-weight: bold;
+                            line-height: 2.5em;
+                            font-size: 1.25em;
+                        }
+                    }
+                }
+                
+                .attempt-block:hover{
+                    background: #eee;
+                    cursor: pointer;
+                }
             }
         }
     }

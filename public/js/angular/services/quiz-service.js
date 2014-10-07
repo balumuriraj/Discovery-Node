@@ -64,6 +64,20 @@ app.factory('quizFactory', ['$http', '$cookieStore', function($http, $cookieStor
             .error(function(data) {
                 console.log("Get Report failed..");
             });
+        },
+        
+        getReports: function(id){
+            return $http({
+                url: baseUrl + '/getReports/' + id,
+                method: "GET"
+            })
+            .success(function(responseData) {
+                console.log("Got Report ..");
+                return responseData;
+            })
+            .error(function(data) {
+                console.log("Get Report failed..");
+            });
         }
     };
     

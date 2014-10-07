@@ -5,7 +5,7 @@
                 <p>{{lab.labname}}</p>
             </div>
             <div class="menu hidden-xs">
-                <a href="">help</a>
+                <a href="" data-toggle="modal" data-target="#helpModal">help</a>
                 <button ng-click="logout()">Sign Out</button>
             </div>
             <div class="mobile-menu visible-xs">
@@ -37,8 +37,8 @@
                             <div class="col-md-8">
                                 <p><strong>Question</strong>
                                 </p>
-                                <p>{{lab.labquestions[currentquestion].question}}</p>
-                                <p>{{lab.labquestions[currentquestion].description}}</p>
+                                <p ng-bind-html="lab.labquestions[currentquestion].question">{{lab.labquestions[currentquestion].question}}</p>
+                                <p ng-bind-html="lab.labquestions[currentquestion].description">{{lab.labquestions[currentquestion].description}}</p>
                                 <br>
                                 <button class="hint-button" data-toggle="modal" data-target="#hintModal"><i class="fa fa-bell"></i> Hint</button>
 
@@ -52,7 +52,7 @@
                                                 <h4 class="modal-title" id="myModalLabel"><i class="fa fa-bell-o"></i> Hint</h4>
                                             </div>
                                             <div class="modal-body">
-                                                {{lab.labquestions[currentquestion].hint}}
+                                                <span ng-bind-html="lab.labquestions[currentquestion].hint">{{lab.labquestions[currentquestion].hint}}</span>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -82,7 +82,7 @@
             <div class="col-md-8">
                 <div class="subquestion-container" ng-repeat="subquestion in lab.labquestions[currentquestion].subquestions">
                     <div class="sub-question-block">
-                        <p>{{subquestion.subquestion}}</p>
+                        <p ng-bind-html="subquestion.subquestion">{{subquestion.subquestion}}</p>
                         <p ng-if="subquestion.optiontype == 'RANGE'">Drag the button to the estimated value of the given range.</p>
                         <p ng-if="subquestion.optiontype == 'CHOICE'">Select the estimated value from the choices given below.</p>
                         <p ng-if="subquestion.optiontype == 'DRAGDROP'">Drag your estimated value into the box below.</p>
@@ -96,22 +96,23 @@
                     <div ng-if="subquestion.optiontype == 'CHOICE'" class="answer-block">
                         <div ng-repeat="option in subquestion.options" class="choice-field">
                             <input type="radio" name="choice{{$parent.$index}}-{{$index}}" id="choiceoption{{$parent.$index}}-{{$index}}" value="{{option}}" ng-model="useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$parent.$index].subanswer" />
-                            <label for="choiceoption{{$parent.$index}}-{{$index}}"><strong>{{$index+1}}</strong>  <span>{{option}}</span> 
+                            <label for="choiceoption{{$parent.$index}}-{{$index}}"><strong>{{$index+1}}</strong>  <span ng-bind-html="option">{{option}}</span> 
                             </label>
                         </div>
                     </div>
 
                     <div ng-if="subquestion.optiontype == 'DRAGDROP'" class="answer-block">
+                        <p>Your answer is <span ng-bind-html="useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$index].subanswer">{{useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$index].subanswer}}</span></p>
                         <div class="dragzone">
                             <div ng-repeat="option in subquestion.options" ng-drag="true" ng-drag-data="option" class="option-item">
-                                {{option}}
+                                <span ng-bind-html="option">{{option}}</span>
                             </div>
                         </div>
 
                         <br/>
                         <div ng-drop="true" ng-drop-success="onDropComplete($data, $event, currentquestion, $index)" class="dropzone">
                             <p ng-if="useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$index].subanswer == ''" ng-class="{ 'nodrop' : useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$index].subanswer == '' }">Drag Here</p>
-                            <p ng-if="useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$index].subanswer != ''">Your answer is {{useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$index].subanswer}}</p>
+                            <p ng-if="useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$index].subanswer != ''" ng-bind-html="useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$index].subanswer">{{useranswer.attempts[attemptcount].answers[currentquestion].subanswers[$index].subanswer}}</p>
                         </div>
 
                     </div>
@@ -153,7 +154,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="counter-block">
-                                    <p>{{useranswer.attempts[attemptcount].score}}</p>
+                                    <p>{{useranswer.attempts[attemptcount].score | number : 2}}</p>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +172,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Submit Modal -->
         <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -186,6 +187,30 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-info" ng-click="submitAnswer(useranswer)">Submit Answer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Help Modal -->
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Help</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Click on Submit button to submit an answer.</p>
+                        <p>The bar besides submit button, shows the progress.</p>
+                        <p>The blue section consists of the question and corresponding image.</p>
+                        <p>The clock and score are shown on the right side of the page.</p>
+                        <p>For range type question, drag the pointer to the appropriate location.</p>
+                        <p>For drag and drop type question, drag the answer block to the answer box below the options.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
