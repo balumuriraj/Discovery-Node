@@ -8,8 +8,8 @@
  * Controller of the discoveryApp
  */
 
-app.controller('LabsCtrl', ['$scope', '$location', 'labsFactory',
-    function ($scope, $location, labsFactory) {
+app.controller('LabsCtrl', ['$scope', '$location', 'localStorageService', 'labsFactory', 'userFactory',
+    function ($scope, $location, localStorageService, labsFactory, userFactory) {
 
         function init() {
             labsFactory.getAllLabs()
@@ -19,6 +19,18 @@ app.controller('LabsCtrl', ['$scope', '$location', 'labsFactory',
                 .error(function (data) {
                     $scope.servicerror = true;
                 });
+            
+            $scope.user = userFactory.getLocalUser();
+            
+            if($scope.user === null){
+                userFactory.getUser()
+                    .success(function(responsedata){
+                        $scope.user = responsedata;
+                    })
+                    .error(function(data) {
+                        alert("Please try again");
+                    });    
+            }
         };
         
         init();

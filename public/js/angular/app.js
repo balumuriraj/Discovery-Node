@@ -18,49 +18,50 @@ var app = angular
     'ngTouch',
     'ngDraggable',
     'ngTimer',
-    'ngd3'
+    'ngd3',
+    'LocalStorageModule'
   ]);
 
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: '/js/angular/partials/home.html',
-            controller: 'HomeCtrl',
             access: true
         })
         .when('/admin', {
-            templateUrl: '/js/angular/partials/admin.html',
-            controller: 'AdminCtrl',
+            templateUrl: '/js/angular/partials/admin/admin.html',
+            access: true
+        })
+        .when('/admin/settings', {
+            templateUrl: '/js/angular/partials/admin/admin-management.html',
             access: true
         })
         .when('/admin/lab/:id', {
-            templateUrl: '/js/angular/partials/admin-create.html',
-            controller: 'AdminCreateCtrl',
+            templateUrl: '/js/angular/partials/admin/admin-create.html',
+            access: true
+        })
+        .when('/admin/students', {
+            templateUrl: '/js/angular/partials/admin/admin-students.html',
             access: true
         })
         .when('/labs', {
             templateUrl: '/js/angular/partials/labs.html',
-            controller: 'LabsCtrl',
             access: false
         })
         .when('/profile', {
             templateUrl: '/js/angular/partials/profile.html',
-            controller: 'ProfileCtrl',
             access: false
         })
         .when('/consent/:id', {
             templateUrl: '/js/angular/partials/consent.html',
-            controller: 'ConsentCtrl',
             access: false
         })
         .when('/lab/:id', {
             templateUrl: '/js/angular/partials/quiz.html',
-            controller: 'QuizCtrl',
             access: false
         })
         .when('/report/:id', {
             templateUrl: '/js/angular/partials/report.html',
-            controller: 'ReportCtrl',
             access: false
         })
         .otherwise({

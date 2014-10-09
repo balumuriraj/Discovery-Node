@@ -1,0 +1,82 @@
+<div class="admin-container" ng-controller="AdminStudentsCtrl">
+    <div ng-include src="'/js/angular/partials/admin/admin-header.html'"></div>
+
+    <div class="content-container">
+        <div class="title-container">
+            <div class="title-section wrap">
+                <p>Students Page</p>
+                <p>Analyze Student data</p>
+                <i class="fa fa-cogs"></i>
+            </div>
+        </div>
+
+        <div class="students-container wrap">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="student-details-block">
+
+                            <div class="students-table">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>#</td>
+                                            <td>Name</td>
+                                            <td>Email</td>
+                                            <td>Type</td>
+                                            <td>Action</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="student in students | filter:searchStudent | filter:{type: typevalue}">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{student.name}}</td>
+                                            <td>{{student.email}}</td>
+                                            <td>
+                                              <span ng-show="student.type">ASU</span>
+                                              <span ng-hide="student.type">Guest</span>
+                                            </td>
+                                            <td>
+                                              <a href="" ng-click="showStudent(student.id)">Show Details</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div ng-if="students.length == 0">
+                                    <p class="no-student">No student data..</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="search-container">
+                            <div class="search-block">
+                                <p><span>{{ (students | filter:searchStudent | filter:{type: typevalue}).length }}</span> students </p>
+                            </div>
+
+                            <div class="search-block">
+                                <input type="text" ng-model="searchStudent" placeholder="Search Student" />
+                            </div>
+
+                            <div class="search-block">
+                                <div class="type-choice">
+                                    <input type="radio" name="asu" id="asu" ng-model="typevalue" value="true" />
+                                    <label for="asu"><span>ASU</span></label>
+                                    <input type="radio" name="asu" id="guest" ng-model="typevalue" value="false" />
+                                    <label for="guest"><span>Guest</span></label>
+                                    <input type="radio" name="all" id="all" ng-model="typevalue" value="" />
+                                    <label for="all"><span>All</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

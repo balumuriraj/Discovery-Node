@@ -1,12 +1,12 @@
-//This handles retrieving data and is used by controllers. 3 options (server, factory, provider) with 
+//This handles retrieving data and is used by controllers. 3 options (server, factory, provider) with
 //each doing the same thing just structuring the functions/data differently.
 
 "use strict";
 
 app.factory('quizFactory', ['$http', '$cookieStore', function($http, $cookieStore) {
-    var baseUrl = "http://localhost:8080/Discoveryapi";
-    //var baseUrl = "http://discovery.a2c2.asu.edu:9090";
-    
+    //var baseUrl = "http://localhost:8080/Discoveryapi";
+    var baseUrl = "http://api.discovery.a2c2.asu.edu";
+
     return {
         submitAnswer: function(useranswer){
             return $http({
@@ -23,7 +23,7 @@ app.factory('quizFactory', ['$http', '$cookieStore', function($http, $cookieStor
                 console.log("Submit Answer failed..");
             });
         },
-        
+
         createUserAnswerDoc: function(labid, userid){
             return $http({
                 url: baseUrl + '/createUserAnswerDoc/' + labid + '/' + userid,
@@ -37,7 +37,7 @@ app.factory('quizFactory', ['$http', '$cookieStore', function($http, $cookieStor
                 console.log("Get UserAnswerDoc failed..");
             });
         },
-        
+
         getUserAnswerDoc: function(id){
             return $http({
                 url: baseUrl + '/getUserAnswerDoc/' + id,
@@ -51,7 +51,7 @@ app.factory('quizFactory', ['$http', '$cookieStore', function($http, $cookieStor
                 console.log("Get UserAnswerDoc failed..");
             });
         },
-        
+
         getReport: function(id){
             return $http({
                 url: baseUrl + '/getReport/' + id,
@@ -65,7 +65,7 @@ app.factory('quizFactory', ['$http', '$cookieStore', function($http, $cookieStor
                 console.log("Get Report failed..");
             });
         },
-        
+
         getReports: function(id){
             return $http({
                 url: baseUrl + '/getReports/' + id,
@@ -80,6 +80,6 @@ app.factory('quizFactory', ['$http', '$cookieStore', function($http, $cookieStor
             });
         }
     };
-    
-    
+
+
 }]);

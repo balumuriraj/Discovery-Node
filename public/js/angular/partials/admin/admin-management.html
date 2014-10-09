@@ -1,0 +1,70 @@
+<!-- This view consisits of the user management component -->
+
+<div class="admin-container" ng-controller="AdminSettingsCtrl">
+    <div ng-include src="'/js/angular/partials/admin/admin-header.html'"></div>
+
+    <div class="content-container">
+        <div class="title-container">
+            <div class="title-section wrap">
+                <p>Settings Page</p>
+                <p>User Management</p>
+                <i class="fa fa-cogs"></i>
+            </div>
+        </div>
+
+        <div class="user-container wrap">
+            <div class="Container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <div class="instructors-table">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Email</td>
+                                        <td>Action</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="instructor in instructors">
+                                        <td>{{instructor.name}}</td>
+                                        <td>{{instructor.email}}</td>
+                                        <td>
+                                          <button ng-click="deleteInstructor(instructor.id)" ng-hide="deleteloading">Delete</button>
+                                          <button ng-show="deleteloading" class="loading-bttn"><i class="fa fa-spinner fa-spin"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div ng-if="instructors.length == 0">
+                                <p class="no-instructor">No Instructor added..</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="add-instructor-container">
+                            <p class="form-title">Add Instructor</p>
+                            <form name="addInstructorForm" ng-submit="submitInstructorForm(addInstructorForm.$valid)" novalidate>
+                                <div class="field-block">
+                                    <input type="email" ng-class="{ 'field-error' : addInstructorForm.email.$error.required && !addInstructorForm.email.$pristine || addInstructorForm.email.$error.email && !addInstructorForm.email.$pristine}" name ="email" ng-model="instructor.email" placeholder="Enter Email" required>
+                                </div>
+
+                                <div class="field-block">
+                                    <input type="text" ng-class="{ 'field-error' : addInstructorForm.name.$error.required && !addInstructorForm.name.$pristine }" name ="name" ng-model="instructor.name" placeholder="Enter Name" required>
+                                </div>
+
+                                <div ng-show="serviceerror" class="service-error">Add Instructor failed! Please Try again..</div>
+
+                                <button type="submit" ng-disabled="addInstructorForm.$invalid" ng-hide="loading">Submit</button>
+                                <button ng-show="loading" class="loading-bttn"><i class="fa fa-spinner fa-spin"></i> Logging in..</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

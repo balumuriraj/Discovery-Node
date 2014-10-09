@@ -8,7 +8,7 @@
  * Controller of the discoveryApp
  */
 
-app.controller('QuizCtrl', ['$scope', '$q', '$routeParams', '$cookieStore', '$location', 'labsFactory', 'userFactory', 'quizFactory', function ($scope, $q, $routeParams, $cookieStore, $location, labsFactory, userFactory, quizFactory) {
+app.controller('QuizCtrl', ['$scope', '$q', '$routeParams', '$cookieStore', '$location', 'labsFactory', 'quizFactory', function ($scope, $q, $routeParams, $cookieStore, $location, labsFactory, quizFactory) {
     
     $scope.useranswer;
     $scope.errors = false;     
@@ -25,15 +25,11 @@ app.controller('QuizCtrl', ['$scope', '$q', '$routeParams', '$cookieStore', '$lo
         promise.then(function(result){
             
             $scope.attemptcount = $scope.useranswer.attempts.length - 1;            
-            $scope.currentquestion = $scope.useranswer.attempts[$scope.attemptcount].currentquestion;       
+            $scope.currentquestion = $scope.useranswer.attempts[$scope.attemptcount].currentquestion;     
             
-            labsFactory.getLab($scope.useranswer.labid)
-                .success(function(responsedata){
-                    $scope.lab = responsedata;                    
-                })
-                .error(function(data) {
-                    alert("Please try again");
-                });
+            $scope.lab = labsFactory.getLocalLab($scope.useranswer.labid);
+            console.log($scope.lab);
+            
         }, function(reason){
             
         });

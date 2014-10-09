@@ -17,10 +17,11 @@
         </div>
 
         <div class="profile-data-container wrap">
-            <p ng-hide="user.type" class="guestuser">Profile not available for Guest User..</p>
+            <!--<p ng-hide="user.type" class="guestuser">Profile not available for Guest User..</p>-->
+            
+            <p ng-if="reports.length == 0" class="guestuser">You havent attempted any Lab..</p>
         
-            <div ng-show="user.type" class="container-fluid"> 
-                
+            <div class="container-fluid">                 
                 <div class="row">
                     <div class="lab-block" ng-repeat="report in reports">
                         <p class="title" ng-repeat="lab in labs | filter:report.labid">{{lab.labname}}</p>

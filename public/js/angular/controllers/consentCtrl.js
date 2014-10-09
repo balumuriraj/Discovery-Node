@@ -8,28 +8,26 @@
  * Controller of the discoveryApp
  */
 
-app.controller('ConsentCtrl', ['$scope', '$q', '$location', '$routeParams', '$cookieStore', 'labsFactory', 'userFactory', 'quizFactory',
-    function ($scope, $q, $location, $routeParams, $cookieStore, labsFactory, userFactory, quizFactory) {
+app.controller('ConsentCtrl', ['$scope', '$q', '$location', '$routeParams', '$cookieStore', 'localStorageService', 'labsFactory', 'userFactory', 'quizFactory',
+    function ($scope, $q, $location, $routeParams, $cookieStore, localStorageService, labsFactory, userFactory, quizFactory) {
         
         function init(){
             console.log("Id is " + $routeParams.id);            
             var id = $routeParams.id;
             
-            labsFactory.getLab(id)
-                .success(function(responsedata){
-                    $scope.lab = responsedata;
-                })
-                .error(function(data) {
-                    alert("Please try again");
-                });
+            $scope.lab = labsFactory.getLocalLab(id);
             
-            userFactory.getUser()
-                .success(function(responsedata){
-                    $scope.user = responsedata;
-                })
-                .error(function(data) {
-                    alert("Please try again");
-                });
+            if($scope.lab === null){
+                labsFactory.getLab(id)
+                    .success(function(responsedata){
+                        $scope.lab = responsedata;
+                    })
+                    .error(function(data) {
+                        alert("Please try again");
+                    });
+            }        
+            
+            $scope.user = userFactory.getLocalUser();
 
         };
         
