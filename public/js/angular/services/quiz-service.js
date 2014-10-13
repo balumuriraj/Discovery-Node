@@ -4,8 +4,8 @@
 "use strict";
 
 app.factory('quizFactory', ['$http', '$cookieStore', function($http, $cookieStore) {
-    //var baseUrl = "http://localhost:8080/Discoveryapi";
-    var baseUrl = "http://api.discovery.a2c2.asu.edu";
+    var baseUrl = "http://localhost:8080/Discoveryapi";
+    //var baseUrl = "http://api.discovery.a2c2.asu.edu";
 
     return {
         submitAnswer: function(useranswer){

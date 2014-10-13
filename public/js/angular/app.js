@@ -30,19 +30,23 @@ app.config(function ($routeProvider) {
         })
         .when('/admin', {
             templateUrl: '/js/angular/partials/admin/admin.html',
+            access: false
+        })
+        .when('/admin-login', {
+            templateUrl: '/js/angular/partials/admin/admin-login.html',
             access: true
         })
         .when('/admin/settings', {
             templateUrl: '/js/angular/partials/admin/admin-management.html',
-            access: true
+            access: false
         })
         .when('/admin/lab/:id', {
             templateUrl: '/js/angular/partials/admin/admin-create.html',
-            access: true
+            access: false
         })
         .when('/admin/students', {
             templateUrl: '/js/angular/partials/admin/admin-students.html',
-            access: true
+            access: false
         })
         .when('/labs', {
             templateUrl: '/js/angular/partials/labs.html',
@@ -74,12 +78,19 @@ app.config(function ($routeProvider) {
         // register listener to watch route changes
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
             //alert(next.access + " " + userFactory.isLoggedIn());
-            if (!next.access) {
+            var url = next.templateUrl;
+            if (!next.access && !(url.indexOf("admin") > -1)) {
                 if (!userFactory.isLoggedIn()) {
                     $location.path('/');
                 }
+            } else if (!next.access && (url.indexOf("admin") > -1)) {
+                if (!userFactory.isAdminLoggedIn()) {
+                    $location.path('/admin-login');
+                }
             } else if (userFactory.isLoggedIn()) {
                 $location.path('/labs');
+            } else if (userFactory.isAdminLoggedIn()) {
+                $location.path('/admin');
             }
         });
 }]);

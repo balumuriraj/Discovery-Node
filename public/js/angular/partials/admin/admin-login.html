@@ -1,0 +1,24 @@
+<div class="admin-container" ng-controller="AdminLoginCtrl">
+
+    <div class="admin-login-container">
+        <div class="login-block">
+            <p class="form-title">Admin Login</p>
+            <form name="adminForm" ng-submit="submitAdminForm(adminForm.$valid)" novalidate>
+                <div class="field-block">
+                    <input type="email" ng-class="{ 'field-error' : adminForm.email.$error.required && !adminForm.email.$pristine || adminForm.email.$error.email && !adminForm.email.$pristine}" name ="email" ng-model="admin.email" placeholder="Enter Email" required>
+                </div>
+
+                <div class="field-block">
+                    <input type="text" ng-class="{ 'field-error' : adminForm.name.$error.required && !adminForm.name.$pristine }" name ="name" ng-model="admin.name" placeholder="Enter Name" required>
+                </div>
+
+                <div ng-show="serviceerror" class="service-error">invalid credentials..</div>
+
+                <button type="submit" ng-disabled="adminForm.$invalid" ng-hide="loading">Submit</button>
+                <button ng-show="loading" class="loading-bttn"><i class="fa fa-spinner fa-spin"></i> Logging in..</button>
+            </form>
+        </div>
+        <br>
+        <a href="/#/"> <i class="fa fa-caret-left"></i> Back to Discovery Home page </a>
+    </div>
+</div>

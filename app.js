@@ -16,7 +16,7 @@ var config     = {
 var routes = require('./routes/index');
 
 var app = express();
-https.createServer(config, app).listen(3001);
+https.createServer(config, app).listen(3443);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -4,10 +4,28 @@
 "use strict";
 
 app.factory('userFactory', ['$http', '$cookieStore', 'localStorageService', function($http, $cookieStore, localStorageService) {
-    //var baseUrl = "http://localhost:8080/Discoveryapi";
-    var baseUrl = "http://api.discovery.a2c2.asu.edu";
+    var baseUrl = "http://localhost:8080/Discoveryapi";
+    //var baseUrl = "http://api.discovery.a2c2.asu.edu";
 
     return {
+
+        adminLogin: function(admin){
+            return $http({
+                headers: {'Content-Type': 'application/json'},
+                url: baseUrl + '/adminLogin',
+                method: "POST",
+                data: admin
+            })
+            .success(function(responseData) {
+                console.log("Admin logged in: " + responseData.name);
+                $cookieStore.put('adminloggedin', 'true');
+                $cookieStore.put('userid', responseData.id);
+            })
+            .error(function(data) {
+                console.log("Admin login failed.." + data);
+            });
+        },
+
         guestUserLogin: function(user){
             return $http({
                 headers: {'Content-Type': 'application/json'},
@@ -21,7 +39,7 @@ app.factory('userFactory', ['$http', '$cookieStore', 'localStorageService', func
                 $cookieStore.put('userid', responseData.id);
             })
             .error(function(data) {
-                console.log("Guest user log in failed..");
+                console.log("Guest user login failed..");
             });
         },
 
@@ -85,7 +103,18 @@ app.factory('userFactory', ['$http', '$cookieStore', 'localStorageService', func
             return loginstatus;
         },
 
+        isAdminLoggedIn: function(){
+            var loginstatus;
+            loginstatus = $cookieStore.get('adminloggedin');
+            if(loginstatus == null)
+            {
+                loginstatus = false;
+            }
+            return loginstatus;
+        },
+
         logout: function(){
+            $cookieStore.remove('adminloggedin');
             $cookieStore.remove('loggedin');
             $cookieStore.remove('userid');
             $cookieStore.remove('timer');

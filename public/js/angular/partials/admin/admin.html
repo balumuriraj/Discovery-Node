@@ -11,24 +11,37 @@
             </div>
         </div>
 
-        <div class="labs-container wrap">
+        <div class="labs-container wrap container-fluid">
 
-            <p ng-show="!labs.length" class="nolabsmsg">No Labs added..</p>
+            <div class="row">
+                <div class="col-md-8">
+                    <p ng-show="!labs.length" class="nolabsmsg">No Labs added..</p>
 
-            <ul>
-                <li ng-repeat="lab in labs">
-                    <div class="lab-block">
+                    <ul>
+                        <li ng-repeat="lab in labs | filter:searchLab">
+                            <div class="lab-block">
 
-                        <div class="content-section">
-                            <p>{{lab.labname}}</p>
-                            <p>{{lab.labdescription}}</p>
-                            <button ng-click="editlab(lab.id)">Edit Lab</button>
-                            <button ng-click="deletelab(lab)">Delete Lab</button>
-                        </div>
+                                <div class="content-section">
+                                    <p>{{lab.labname}}</p>
+                                    <p>{{lab.labdescription}}</p>
+                                    <button ng-click="editlab(lab.id)">Edit Lab</button>
+                                    <button ng-click="deletelab(lab)">Delete Lab</button>
+                                    <button ng-click="">Go Live!</button>
+                                </div>
 
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <div class="sidebar-container">
+                        <p><span>{{ (labs | filter:searchLab).length }}</span> labs </p>
+                        <input type="text" ng-model="searchLab" placeholder="Search Lab" />
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
