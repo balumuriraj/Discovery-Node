@@ -30,7 +30,7 @@ app.config(function ($routeProvider) {
         })
         .when('/admin', {
             templateUrl: '/js/angular/partials/admin/admin.html',
-            access: true
+            access: false
         })
         .when('/admin-login', {
             templateUrl: '/js/angular/partials/admin/admin-login.html',
@@ -38,15 +38,15 @@ app.config(function ($routeProvider) {
         })
         .when('/admin/settings', {
             templateUrl: '/js/angular/partials/admin/admin-management.html',
-            access: true
+            access: false
         })
         .when('/admin/lab/:id', {
             templateUrl: '/js/angular/partials/admin/admin-create.html',
-            access: true
+            access: false
         })
         .when('/admin/students', {
             templateUrl: '/js/angular/partials/admin/admin-students.html',
-            access: true
+            access: false
         })
         .when('/labs', {
             templateUrl: '/js/angular/partials/labs.html',
