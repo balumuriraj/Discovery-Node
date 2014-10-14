@@ -57,16 +57,35 @@ app.factory('userFactory', ['$http', '$cookieStore', 'localStorageService', func
         },
 
         validateTicket: function(ticket){
+          /*
             return $http({
                 url: 'https://weblogin.asu.edu/cas/validate?service=https%3A%2F%2Fdiscovery.a2c2.asu.edu&ticket=' + ticket,
                 method: "GET"
             })
             .success(function(responseData) {
                 console.log("valid: " + responseData);
+                $cookieStore.put('loggedin', 'true');
+                $cookieStore.put('userid', '123');
             })
             .error(function(data) {
                 console.log("Not valid..");
             });
+          */
+
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = 'https://weblogin.asu.edu/cas/validate?service=https%3A%2F%2Fdiscovery.a2c2.asu.edu&ticket=' + ticket + '?callback=myCallback';
+
+          console.log("executing callback: " + script.src);
+          function myCallback(data){
+              var len = data.length;
+              console.log("data: " + data)
+              for(var i=0;i<len;i++){
+                  console.log(data[i])
+              }
+              return data;
+          }
+
         },
 
         getUser: function(){

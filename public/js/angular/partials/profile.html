@@ -6,7 +6,7 @@
             </div>
         </div>
     </header>
-    
+
     <div class="content-container">
         <div class="title-container">
             <div class="title-section wrap">
@@ -18,25 +18,25 @@
 
         <div class="profile-data-container wrap">
             <!--<p ng-hide="user.type" class="guestuser">Profile not available for Guest User..</p>-->
-            
+
             <p ng-if="reports.length == 0" class="guestuser">You havent attempted any Lab..</p>
-        
-            <div class="container-fluid">                 
+
+            <div class="container-fluid">
                 <div class="row">
                     <div class="lab-block" ng-repeat="report in reports">
                         <p class="title" ng-repeat="lab in labs | filter:report.labid">{{lab.labname}}</p>
-                        <div class="attempt-block" ng-repeat="attempt in report.attempts">  
+                        <div class="attempt-block" ng-repeat="attempt in report.attempts" ng-click="showReport(report.id)">
                             <div class="col-md-8">
                                 <p>Attempt {{$index+1}}</p>
                                 <p>{{attempt.date | date}}</p>
                             </div>
                             <div class="col-md-4 score-block">
                                 <p>{{attempt.score | number : 2}}</p>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!--
                 <div class="row">
                     <div class="col-md-12">
@@ -67,6 +67,6 @@
                 -->
             </div>
         </div>
-        
+
     </div>
 </div>

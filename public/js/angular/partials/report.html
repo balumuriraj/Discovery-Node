@@ -6,7 +6,7 @@
             </div>
         </div>
     </header>
-    
+
     <div class="content-container">
         <div class="title-container">
             <div class="title-section wrap">
@@ -15,7 +15,7 @@
                 <i class="fa fa-cogs"></i>
             </div>
         </div>
-        
+
         <div class="report-container wrap">
             <div class="container-fluid">
                 <div class="row">
@@ -39,41 +39,49 @@
                                     <p>{{report.attempts[attemptcount].date | date}}</p>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <p class="message">Well Done!</p>
                     </div>
                 </div>
-                
+
                 <br>
                 <hr>
-                
+
                 <div class="row stats-container">
                     <div class="col-md-4 col-sm-4">
                         <p>ATTEMPTED</p>
                         <p>(out of {{report.attempts[attemptcount].answers.length}})</p>
-                        <div class="donut-container">                            
+                        <div class="donut-container">
                             <donut val="attempted"></donut>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <p>SCORE</p>
                         <p>(out of {{report.attempts[attemptcount].answers.length*10}})</p>
-                        <div class="donut-container">                            
+                        <div class="donut-container">
                             <donut val="score"></donut>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <p>AVG TIME</p>
                         <p>(in Minutes)</p>
-                        <div class="donut-container">                            
+                        <div class="donut-container">
                             <donut val="time"></donut>
                         </div>
                     </div>
                 </div>
+
+                <hr>
+
+                <div class="button-section">
+                    <button>Re-take Test</button>
+                    <button>Go to Profile</button>
+                </div>
+
             </div>
         </div>
-        
+
     </div>
 </div>
