@@ -4,8 +4,8 @@
 "use strict";
 
 app.factory('labsFactory', ['$http', 'localStorageService', function($http, localStorageService) {
-    var baseUrl = "http://localhost:8080/Discoveryapi";
-    //var baseUrl = "http://api.discovery.a2c2.asu.edu";
+    //var baseUrl = "http://localhost:8080/Discoveryapi";
+    var baseUrl = "http://api.discovery.a2c2.asu.edu";
 
     return {
         getAllLabs: function(){

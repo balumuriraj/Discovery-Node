@@ -4,8 +4,8 @@
 "use strict";
 
 app.factory('userFactory', ['$http', '$cookieStore', 'localStorageService', function($http, $cookieStore, localStorageService) {
-    var baseUrl = "http://localhost:8080/Discoveryapi";
-    //var baseUrl = "http://api.discovery.a2c2.asu.edu";
+    //var baseUrl = "http://localhost:8080/Discoveryapi";
+    var baseUrl = "http://api.discovery.a2c2.asu.edu";
 
     return {
 
