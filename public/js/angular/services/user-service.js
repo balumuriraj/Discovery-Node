@@ -106,6 +106,22 @@ app.factory('userFactory', ['$http', '$cookieStore', 'localStorageService', func
 
         },
 
+        getUserbyId: function(userid){
+
+            return $http({
+                url: baseUrl + '/getUser/' + userid,
+                method: "GET"
+            })
+            .success(function(responseData) {
+                console.log("Got User!");
+                return responseData;
+            })
+            .error(function(data) {
+                console.log("Get User failed..");
+            });
+
+        },
+
         getLocalUser: function(){
             console.log("Got User from local storage!");
             var userid = $cookieStore.get('userid');

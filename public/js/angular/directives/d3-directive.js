@@ -4,30 +4,41 @@
 
 angular.module("ngd3", [])
     .directive('donut', ['$timeout', function(timer) {
-    
+
     var $container = $('.donut-container'),
         angle = 2 * Math.PI;
-    
+
     var width = $container.width(),
     height = width,
     outerRadius = Math.min(width,height)/2,
     innerRadius = (outerRadius/3)*2,
     fontSize = (Math.min(width,height)/4);
-    
+
+    var red = "#f06060";
+    var green = "#2ecc71";
+    var orange = "#f1c40f";
+
     console.log(width + " " + height + " " +  outerRadius + " " + innerRadius);
 
     return{
         restrict: 'E', // the directive can be invoked only by using <donut> tag in the template
         scope: {
-            val: '='  
+            val: '='
         },
         link: function(scope, element, attrs) {
-            
+
             var svgfun = function(){
-                
+
                 console.log("**************************************************"+scope.val.value);
-                
-                
+                var colorused = red;
+
+                if(scope.val.percent >= 75){
+                    colorused = green;
+                } else if(scope.val.percent >= 50 && scope.val.percent <75){
+                    colorused = orange;
+                }
+
+
                 // set up initial svg object
                 var svg = d3.select(element[0])
                     .append("svg")
@@ -57,7 +68,7 @@ angular.module("ngd3", [])
 
                 var foreground = svg.append("path")
                     .datum({endAngle: 0 * angle})
-                    .style("fill", "#f06060")
+                    .style("fill", colorused)
                     .attr("d", arc);
 
                 setTimeout(function() {
@@ -78,16 +89,16 @@ angular.module("ngd3", [])
                             return arc(d);
                         };
                     });
-                }   
+                }
             }
-            
+
             timer(svgfun, 500);
-            
+
             scope.$watch('exp', function (newVal, oldVal) {
-                
+
             });
-            
+
         }
     };
-    
+
 }]);

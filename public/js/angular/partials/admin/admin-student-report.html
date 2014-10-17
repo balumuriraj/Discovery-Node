@@ -2,7 +2,7 @@
     <header>
         <div class="report-header-container">
             <div class="wrap">
-                <div ng-include src="'/js/angular/partials/header.html'"></div>
+                <div ng-include src="'/js/angular/partials/admin/admin-header.html'"></div>
             </div>
         </div>
     </header>
@@ -10,26 +10,34 @@
     <div class="content-container">
         <div class="title-container">
             <div class="title-section wrap">
-                <p>Report</p>
-                <p>{{user.name}} <span>({{user.email}})</span></p>
+                <p>Students Page</p>
+                <p>Analyze Student data</p>
                 <i class="fa fa-cogs"></i>
             </div>
         </div>
 
         <div class="report-container wrap">
             <div class="container-fluid">
-
                 <ol class="breadcrumb-container">
-                    <li><a href="/#/profile">Profile</a></li>
+                    <li><a href="/#/admin/students">Students</a></li>
+                    <li><a href="/#/admin/students/profile/{{user.id}}">Profile</a></li>
                     <li><a href="">report</a></li>
                 </ol>
 
                 <hr>
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <table class="report-table">
                             <tbody>
+                                <tr>
+                                    <td><p>Name: </p></td>
+                                    <td><p>{{user.name}}</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Email: </p></td>
+                                    <td><p>{{user.email}}</p></td>
+                                </tr>
                                 <tr>
                                     <td><p>Quiz: </p></td>
                                     <td><p>{{lab.labname}}</p></td>
@@ -38,6 +46,12 @@
                                     <td><p>Attempt: </p></td>
                                     <td><p>{{attemptcount+1}}</p></td>
                                 </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="report-table">
+                            <tbody>
                                 <tr>
                                     <td><p>Score: </p></td>
                                     <td><p>{{report.attempts[attemptcount].score | number : 2}}</p></td>
@@ -52,11 +66,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="message" ng-if="score.percent >= 75">Well Done!</p>
-                        <p class="message" ng-if="score.percent >= 50 && score.percent < 75">Average!</p>
-                        <p class="message" ng-if="score.percent < 50">Try Again!</p>
                     </div>
                 </div>
 
@@ -90,8 +99,7 @@
                 <hr>
 
                 <div class="button-section">
-                    <a href="/#/consent/{{lab.id}}">Re-take Test</a>
-                    <a href="/#/profile">Go to Profile</a>
+                    <a href="/#/admin/students/profile/{{user.id}}">Go back to Student Profile</a>
                 </div>
 
             </div>

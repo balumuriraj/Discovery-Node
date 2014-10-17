@@ -8,8 +8,8 @@
  * Controller of the discoveryApp
  */
 
-app.controller('AdminStudentsCtrl', ['$scope', 'userFactory',
-    function ($scope, userFactory) {
+app.controller('AdminStudentsCtrl', ['$scope', '$location', 'userFactory',
+    function ($scope, $location, userFactory) {
 
         function init() {
             userFactory.getAllStudents()

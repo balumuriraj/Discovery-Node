@@ -48,6 +48,14 @@ app.config(function ($routeProvider) {
             templateUrl: '/js/angular/partials/admin/admin-students.html',
             access: false
         })
+        .when('/admin/students/profile/:id', {
+            templateUrl: '/js/angular/partials/admin/admin-student-profile.html',
+            access: false
+        })
+        .when('/admin/students/profile/report/:userid/:reportid/:attemptid', {
+            templateUrl: '/js/angular/partials/admin/admin-student-report.html',
+            access: false
+        })
         .when('/labs', {
             templateUrl: '/js/angular/partials/labs.html',
             access: false
@@ -64,7 +72,7 @@ app.config(function ($routeProvider) {
             templateUrl: '/js/angular/partials/quiz.html',
             access: false
         })
-        .when('/report/:id', {
+        .when('/report/:reportid/:attemptid', {
             templateUrl: '/js/angular/partials/report.html',
             access: false
         })

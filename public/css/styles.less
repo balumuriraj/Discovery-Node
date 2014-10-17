@@ -272,6 +272,71 @@ color: #fff;
         top: 0px;
     }
 }
+
+/***** Common *****/
+.breadcrumb-container {
+    padding: 0;
+    list-style: none;
+    margin-bottom: 2em;
+
+    li{
+        position: relative;
+        width: 7.5em;
+        text-align: center;
+        background: #34495e;
+        padding: 0.5em 1em;
+        margin-right: 1em;
+        display: inline-block;
+        font-size: 1.25em;
+        font-weight: bold;
+        border-radius: 4px 0 0 4px;
+
+        a{
+            padding-left: 1.25em;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        a:after {
+          	content: "";
+          	border-top: 1.25em solid #fff;
+          	border-bottom: 1.25em solid #fff;
+          	border-left: 1.25em solid #34495e;
+          	position: absolute;
+            right: -1.2em;
+            top: 0;
+        }
+
+        a:before {
+          	content: "";
+          	border-top: 1.25em solid transparent;
+          	border-bottom: 1.25em solid transparent;
+          	border-left: 1.25em solid #fff;
+          	position: absolute; left: 0; top: 0;
+        }
+    }
+
+    li:first-child{
+      padding-left: 0;
+      a:before {
+          display: none;
+      }
+    }
+
+    li:last-child{
+        background: #ddd;
+        border-radius: 4px;
+
+        a{
+            color: #34495e;
+        }
+
+        a:after {
+            display: none;
+        }
+    }
+}
+
 /**** Home Page ****/
 
 .home-container {
@@ -954,13 +1019,20 @@ color: #fff;
             padding: 2em;
             .one-edge-shadow();
 
-            .guestuser{
+            .nolab{
                 margin: 0;
                 font-size: 3em;
                 font-weight: bold;
                 text-align: center;
                 padding: 2em 0;
                 color: #999;
+            }
+
+            .user-table{
+                font-size: 1.5em;
+                .user-table-title{
+                    font-weight: bold;
+                }
             }
 
             .stat-box{
@@ -1043,7 +1115,8 @@ color: #fff;
             .one-edge-shadow();
 
             .report-table{
-                .report-table-title{
+                tbody tr td:first-child{
+                    width: 10em;
                     p{
                         margin: 0;
                         font-weight: bold;
@@ -1052,7 +1125,7 @@ color: #fff;
                     }
                 }
 
-                .report-table-answer {
+                tbody tr td:nth-child(2) {
                     p{
                         margin: 0;
                         font-size: 1.5em;
@@ -1099,13 +1172,26 @@ color: #fff;
             .button-section{
                 text-align: center;
                 padding: 2em;
-                
-                button{
+
+                a{
                     .basic-button();
+                    margin: 0 1em;
+                    font-weight: normal;
+                    text-decoration: none;
                     font-size: 1.5em;
                     background: #fff;
                     color: #aaa;
                     border: 1px solid #ddd;
+                }
+
+                a:hover{
+                    color: #777;
+                    border: 1px solid #999;
+                }
+
+                a:active{
+                    position: relative;
+                    top: 2px;
                 }
             }
         }

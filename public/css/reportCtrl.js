@@ -13,11 +13,9 @@ app.controller('ReportCtrl', ['$scope', '$routeParams', 'userFactory', 'quizFact
     $scope.attemptcount;
 
     function init() {
-        var id = $routeParams.reportid;
-        var attempt = $routeParams.attemptid;
+        var id = $routeParams.id;
         var userid = $routeParams.userid;
 
-        $scope.attemptcount = attempt;
         $scope.user = userFactory.getLocalUser();
 
         if(!($scope.user)){
@@ -33,13 +31,7 @@ app.controller('ReportCtrl', ['$scope', '$routeParams', 'userFactory', 'quizFact
         quizFactory.getReport(id)
             .success(function(responsedata){
                 $scope.report = responsedata;
-
-                if($scope.attemptcount){
-                    $scope.attemptcount = $scope.attemptcount - 1;
-                } else{
-                    $scope.attemptcount = $scope.report.attempts.length - 1;
-                }
-
+                $scope.attemptcount = $scope.report.attempts.length - 1;
                 $scope.lab = labsFactory.getLocalLab($scope.report.labid);
 
                 if($scope.lab){
