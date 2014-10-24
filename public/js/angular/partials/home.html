@@ -1,62 +1,227 @@
 <div class="home-container" ng-controller="HomeCtrl">
-    <div class="content-block container-fluid">
-        <div class="row">
-            <div class="col-md-7">
-                <div class="title-section">
-                    <p class="home-title"><span>Discovery</span> Lab</p>
-                    <p class="home-subtitle hidden-xs hidden-sm">An interactive Lab with numerous questions that helps honing the skills of the students</p>
-                    <img src="/img/svg/discovery-home.svg" class="hidden-xs hidden-sm" />
-                </div>
+
+    <header>
+        <div class="header-block clearfix">
+            <div class="logo-block">
+                <div class="logo-icon"><i class="fa fa-flask"></i></div>
+                <div class="logo-text">Discovery <span>Lab</span></div>
             </div>
-            <div class="col-md-5">
-                <div class="login-section">
-                    <div class="asu-block">
-                        <div class="buttons-toggle-section">
-                            <button ng-click="toggleclass('asu')" ng-class="{'login-active': showasu}">ASU</button>
-                            <button ng-click="toggleclass('guest')" ng-class="{'login-active': !showasu}">GUEST</button>
-                        </div>
-                        <div ng-show="showasu" class="login-form">
-                            <!--
-                            <form name="asuForm" ng-submit="submitASUForm(asuForm.$valid)" novalidate>
-                                <div class="field-block">
-                                    
-                                    <input type="text" ng-class="{ 'field-error' : asuForm.userid.$error.required && !asuForm.userid.$pristine }" name ="userid" ng-model="asuuser.userid" placeholder="ASURITE User ID" required>
-                                </div>
-                                
-                                <div class="field-block">
-                                    <input type="password" ng-class="{ 'field-error' : asuForm.password.$error.required && !asuForm.password.$pristine }" name ="password" ng-model="asuuser.password" placeholder="password" required>
-                                </div>
-                                
-                                <div ng-show="serviceerror" class="service-error">Login Failed! Please Try again..</div>
-                                
-                                <button type="submit" ng-disabled="asuForm.$invalid">Log In</button>
-                            </form>
-                            -->
-                            <div class="cas-login">
-                                <p>ASU CAS Authentication</p>
-                                <button ng-click="casAuth()">ASU Log In</button>
-                            </div>
-                        </div>
-                        
-                        <div ng-hide="showasu" class="login-form">
-                            <form name="guestForm" ng-submit="submitGuestForm(guestForm.$valid)" novalidate>
-                                <div class="field-block">
-                                    <input type="email" ng-class="{ 'field-error' : guestForm.email.$error.required && !guestForm.email.$pristine || guestForm.email.$error.email && !guestForm.email.$pristine}" name ="email" ng-model="guestuser.email" placeholder="Enter your Email" required>
-                                </div>
-                                
-                                <div class="field-block">
-                                    <input type="text" ng-class="{ 'field-error' : guestForm.name.$error.required && !guestForm.name.$pristine }" name ="name" ng-model="guestuser.name" placeholder="Enter your Name" required>
-                                </div>
-                                
-                                <div ng-show="serviceerror" class="service-error">Login Failed! Please Try again..</div>
-                                
-                                <button type="submit" ng-disabled="guestForm.$invalid" ng-hide="loading">Log In</button>
-                                <button ng-show="loading" class="loading-bttn"><i class="fa fa-spinner fa-spin"></i> Logging in..</button>
-                            </form>
-                        </div>
+            <div class="signin-block">
+                <ul>
+                    <li><a href="" onclick="home()">home</a></li>
+                    <li><a href="" onclick="students()">students</a></li>
+                    <li><a href="" onclick="instructor()">instructors</a></li>
+                    <li><a href="" onclick="home()">sign in</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="down-button"  id="down-button">
+        <div class="outer-layer">
+            <i class="fa fa-angle-down"></i>
+        </div>
+    </div>
+
+    <div class="up-button" id="up-button">
+        <div class="outer-layer">
+            <i class="fa fa-angle-up"></i>
+        </div>
+    </div>
+
+    <div class="content-block container-fluid" id="content-block">
+
+        <div id="section1">
+            <div class="main-block">
+              <div class="row">
+                  <div class="col-md-7">
+                      <div class="title-section">
+                          <div class="logo-block">
+                              <div class="logo-icon"><i class="fa fa-flask"></i></div>
+                              <div class="logo-text">Discovery <span>Lab</span></div>
+                          </div>
+                          <!--<p class="home-subtitle hidden-xs hidden-sm">An interactive Lab with numerous questions that helps honing the skills of the students</p>-->
+                          <!--<img src="/img/svg/discovery-home.svg" class="hidden-xs hidden-sm" />-->
+                      </div>
+                  </div>
+                  <div class="col-md-5">
+                      <div class="login-section">
+                          <div class="asu-block">
+                              <div class="buttons-toggle-section">
+                                  <button ng-click="toggleclass('asu')" ng-class="{'login-active': showasu}">ASU</button>
+                                  <button ng-click="toggleclass('guest')" ng-class="{'login-active': !showasu}">GUEST</button>
+                              </div>
+                              <div ng-show="showasu" class="login-form">
+                                  <!--
+                                  <form name="asuForm" ng-submit="submitASUForm(asuForm.$valid)" novalidate>
+                                      <div class="field-block">
+
+                                          <input type="text" ng-class="{ 'field-error' : asuForm.userid.$error.required && !asuForm.userid.$pristine }" name ="userid" ng-model="asuuser.userid" placeholder="ASURITE User ID" required>
+                                      </div>
+
+                                      <div class="field-block">
+                                          <input type="password" ng-class="{ 'field-error' : asuForm.password.$error.required && !asuForm.password.$pristine }" name ="password" ng-model="asuuser.password" placeholder="password" required>
+                                      </div>
+
+                                      <div ng-show="serviceerror" class="service-error">Login Failed! Please Try again..</div>
+
+                                      <button type="submit" ng-disabled="asuForm.$invalid">Log In</button>
+                                  </form>
+                                  -->
+                                  <div class="cas-login">
+                                      <p>ASU CAS Authentication</p>
+                                      <button ng-click="casAuth()">ASU Log In</button>
+                                  </div>
+                              </div>
+
+                              <div ng-hide="showasu" class="login-form">
+                                  <form name="guestForm" ng-submit="submitGuestForm(guestForm.$valid)" novalidate>
+                                      <div class="field-block">
+                                          <input type="email" ng-class="{ 'field-error' : guestForm.email.$error.required && !guestForm.email.$pristine || guestForm.email.$error.email && !guestForm.email.$pristine}" name ="email" ng-model="guestuser.email" placeholder="Enter your Email" required>
+                                      </div>
+
+                                      <div class="field-block">
+                                          <input type="text" ng-class="{ 'field-error' : guestForm.name.$error.required && !guestForm.name.$pristine }" name ="name" ng-model="guestuser.name" placeholder="Enter your Name" required>
+                                      </div>
+
+                                      <div ng-show="serviceerror" class="service-error">Login Failed! Please Try again..</div>
+
+                                      <button type="submit" ng-disabled="guestForm.$invalid" ng-hide="loading">Log In</button>
+                                      <button ng-show="loading" class="loading-bttn"><i class="fa fa-spinner fa-spin"></i> Logging in..</button>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+
+
+        <div id="section2">
+            <div class="main-block">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="student-title">An <span>interactive</span> Lab with numerous questions that helps honing the skills of the students.</p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="image"><img src="/img/svg/discovery-home.svg" /></div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div id="section3">
+            <div class="main-block">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="stats-icon"><i class="fa fa-line-chart"></i></div>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="instructor-title">The instructors can create, delete, modify labs. It also allows the instructor to analyze student data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+
+<script>
+    var section1 = $('#section1');
+    var section2 = $('#section2');
+    var section3 = $('#section3');
+    var contentblock = $('.content-block');
+
+    var upbutton = $('#up-button');
+    var downbutton = $('#down-button');
+
+    var scrollcount = 0;
+    home();
+
+    //Firefox
+   $('html, body').bind('DOMMouseScroll', function(e){
+       if(e.originalEvent.detail > 0) {
+           //scroll down
+           console.log('Down');
+           if(scrollcount < 2){
+              scrollcount = scrollcount + 1;
+           }
+           console.log('count: ' + scrollcount);
+       }else {
+           //scroll up
+           console.log('Up');
+           if(scrollcount > 0){
+             scrollcount = scrollcount - 1;
+           }
+       }
+
+       if(scrollcount == 0){
+           home();
+       } else if(scrollcount == 1){
+           students();
+       }
+       else if(scrollcount == 2){
+           instructor();
+       }
+
+       //prevent page fom scrolling
+       return false;
+   });
+
+   //IE, Opera, Safari
+   $('html, body').bind('mousewheel', function(e){
+       if(e.originalEvent.wheelDelta < 0) {
+           //scroll down
+           console.log('Down');
+           if(scrollcount < 2){
+              scrollcount = scrollcount + 1;
+           }
+           console.log('count: ' + scrollcount);
+       }else {
+           //scroll up
+           console.log('Up');
+           if(scrollcount > 0){
+             scrollcount = scrollcount - 1;
+           }
+           console.log('count: ' + scrollcount);
+       }
+
+       if(scrollcount <= 0){
+           home();
+       } else if(scrollcount == 1){
+           students();
+       }
+       else if(scrollcount >= 2){
+           instructor();
+       }
+
+
+       //prevent page fom scrolling
+       return false;
+   });
+
+    function students(){
+      $('html, body').animate({
+          scrollTop: section2.offset().top,
+      }, 500);
+      upbutton.hide();
+      downbutton.show();
+    }
+
+    function instructor(){
+      $('html, body').animate({
+          scrollTop: section3.offset().top
+      }, 500);
+      upbutton.show();
+      downbutton.hide();
+    }
+
+    function home(){
+      $('html, body').animate({
+          scrollTop: section1.offset().top
+      }, 500);
+      upbutton.hide();
+      downbutton.show();
+    }
+</script>

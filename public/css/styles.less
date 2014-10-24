@@ -53,6 +53,15 @@ body {
     transform: translateX(-50%) translateY(-50%);
 }
 
+.center-div-horizontal(){
+    position: absolute;
+    top: 50%;
+    -webkit-transform:  translateY(-50%);
+    -moz-transform:  translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
 .alertmsg(){
     z-index: 5;
     visibility: hidden;
@@ -337,86 +346,291 @@ color: #fff;
     }
 }
 
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
 /**** Home Page ****/
 
 .home-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: @maincolor;
-    text-align: center;
-    color: #fff;
-    .content-block {
-        position: relative;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-        padding: 3em;
-        width: 75%;
-        max-width: 1440px;
-        margin: 0 auto;
-        text-align: left;
-        .title-section {
-            .title-section();
-        }
-        .login-section {
-            padding: 3.5em 3.5em;
-            background: #fff;
-            color: #aaa;
-            border-radius: 3px;
-            .asu-block {
-                .buttons-toggle-section {
-                    padding: 0 0 1em 0;
-                    button {
-                        width: 49.25%;
-                        display: inline-block;
-                        outline: none;
-                        border: 0;
-                        padding: 0.5em;
-                        font-size: 2em;
-                        font-weight: bold;
-                        text-transform: uppercase;
-                        margin: 0;
-                        background: rgba(0, 0, 0, 0.1);
-                    }
-                    button:active {
-                        position: relative;
-                        top: 2px;
-                    }
-                    .login-active {
-                        background: #fff;
-                    }
+    background: #ecf0f1;
+
+    .header-block{
+        background: #fff;
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+        padding: 1.5em;
+        .one-edge-shadow();
+
+        .logo-block{
+            display: inline-block;
+            float: left;
+            color: #999;
+
+            .logo-icon{
+                display: inline-block;
+                i{
+                    font-size: 3em;
+                    color: @redcolor;
                 }
-                .login-form {
+            }
+            .logo-text{
+                display: inline-block;
+                font-size: 1.5em;
+                line-height: 1em;
+                font-weight: bold;
 
-                    .cas-login{
-                        margin-top: 0.5em;
-                        background: #fff;
-                        border: 1px solid #ddd;
-                        padding: 2em;
-                        text-align: center;
-                        word-wrap: break-word;
-
-                        p{
-                            margin: 0;
-                            font-size: 2em;
-                            font-weight: bold;
-                            padding-bottom: 1em;
-                        }
-
-                        button{
-                            .basic-button();
-                            background: @greencolor;
-                            font-size: 1.25em;
-                        }
-                    }
-
-                    .formfields();
+                span{
+                  display: block;
+                  text-align: right;
+                  font-size: 0.75em;
+                  font-weight: normal;
+                  color: #bbb;
                 }
             }
         }
+
+        .signin-block{
+            display: inline-block;
+            float: right;
+            color: #777;
+
+            ul{
+                list-style: none;
+                margin:0;
+                padding: 0;
+
+                li{
+                    display: inline-block;
+                    font-weight: bold;
+                    padding: 1em;
+
+                    a{
+                        color: #777;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .down-button{
+        position: fixed;
+        right: 2em;
+        bottom: 6em;
+        z-index: 5;
+
+        .outer-layer{
+          background: white;
+          border-radius: 20em;
+
+          i{
+            padding: 0.35em 0.5em;
+            color: #555;
+            font-size: 2em;
+            font-weight: bold;
+          }
+        }
+    }
+
+    .up-button{
+        display: none;
+        position: fixed;
+        right: 2em;
+        bottom: 6em;
+        z-index: 5;
+
+        .outer-layer{
+          background: white;
+          border-radius: 20em;
+
+          i{
+            padding: 0.35em 0.5em;
+            color: #555;
+            font-size: 2em;
+            font-weight: bold;
+          }
+        }
+    }
+
+    .content-block {
+        //.center-div();
+        width: 100%;
+        padding:0;
+
+        #section1{
+          position: relative;
+          top: 10vh;
+          height:90vh;
+          .one-edge-shadow();
+
+          .main-block{
+
+              .center-div();
+              width: 75%;
+
+
+              .title-section {
+                  padding-top: 6em;
+                  .logo-block{
+                      display: inline-block;
+                      color: #999;
+
+                      .logo-icon{
+                          display: inline-block;
+                          i{
+                              font-size: 15em;
+                              color: @redcolor;
+                          }
+                      }
+                      .logo-text{
+                          display: inline-block;
+                          font-size: 5em;
+                          line-height: 1.25em;
+                          font-weight: bold;
+
+                          span{
+                            display: block;
+                            text-align: right;
+                            font-size: 1em;
+                            font-weight: normal;
+                            color: #bbb;
+                          }
+                      }
+                  }
+              }
+
+              .login-section {
+                  padding: 3.5em 3.5em;
+                  background: #fff;
+                  color: #aaa;
+                  border-radius: 3px;
+                  .asu-block {
+                      .buttons-toggle-section {
+                          padding: 0 0 1em 0;
+                          button {
+                              width: 49.25%;
+                              display: inline-block;
+                              outline: none;
+                              border: 0;
+                              padding: 0.5em;
+                              font-size: 2em;
+                              font-weight: bold;
+                              text-transform: uppercase;
+                              margin: 0;
+                              background: rgba(0, 0, 0, 0.1);
+                          }
+                          button:active {
+                              position: relative;
+                              top: 2px;
+                          }
+                          .login-active {
+                              background: #fff;
+                          }
+                      }
+                      .login-form {
+
+                          .cas-login{
+                              margin-top: 0.5em;
+                              background: #fff;
+                              border: 1px solid #ddd;
+                              padding: 2em;
+                              text-align: center;
+                              word-wrap: break-word;
+
+                              p{
+                                  margin: 0;
+                                  font-size: 2em;
+                                  font-weight: bold;
+                                  padding-bottom: 1em;
+                              }
+
+                              button{
+                                  .basic-button();
+                                  background: @greencolor;
+                                  font-size: 1.25em;
+                              }
+                          }
+
+                          .formfields();
+                      }
+                  }
+              }
+            }
+        }
+
+        #section2{
+            position: relative;
+            top: 10vh;
+            height:90vh;
+            background: @maincolor;
+            .one-edge-shadow();
+
+            .main-block{
+                .center-div();
+                width: 75%;
+
+                .student-title{
+                    color: #fff;
+                    margin: 0;
+                    font-size: 2em;
+                    padding: 1em;
+
+                    span{
+                      font-size: 1.75em;
+                      font-weight: bold;
+                    }
+                }
+
+                .image{
+                    img {
+                       width: 100%;
+                    }
+                }
+            }
+        }
+
+        #section3{
+            position: relative;
+            top: 10vh;
+            height:90vh;
+            background: @redcolor;
+            .one-edge-shadow();
+
+
+            .main-block{
+                .center-div();
+                width: 75%;
+
+                .stats-icon{
+                    text-align: center;
+                    i{
+                      font-size: 15em;
+                      color: #fff;
+                    }
+                }
+
+                .instructor-title{
+                    color: #fff;
+                    margin: 0;
+                    font-size: 2em;
+                    padding: 1em;
+
+
+                    span{
+                      font-size: 1.75em;
+                      font-weight: bold;
+                    }
+                }
+            }
+
+        }
+
     }
 }
 
