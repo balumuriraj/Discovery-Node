@@ -3,8 +3,11 @@
     <header>
         <div class="header-block clearfix">
             <div class="logo-block">
-                <div class="logo-icon"><i class="fa fa-flask"></i></div>
-                <div class="logo-text">Discovery <span>Lab</span></div>
+                <div class="logo-icon">
+                  <!--<i class="fa fa-flask"></i>-->
+                  <img src="/img/svg/logo.svg" />
+                </div>
+                <div class="logo-text">Discovery</div>
             </div>
             <div class="signin-block">
                 <ul>
@@ -37,7 +40,7 @@
                   <div class="col-md-7">
                       <div class="title-section">
                           <div class="logo-block">
-                              <div class="logo-icon"><i class="fa fa-flask"></i></div>
+                              <div class="logo-icon"><img src="/img/svg/logo.svg" /></div>
                               <div class="logo-text">Discovery <span>Lab</span></div>
                           </div>
                           <!--<p class="home-subtitle hidden-xs hidden-sm">An interactive Lab with numerous questions that helps honing the skills of the students</p>-->
@@ -70,6 +73,7 @@
                                   -->
                                   <div class="cas-login">
                                       <p>ASU CAS Authentication</p>
+                                      <p>Login with ASU credentials to access this application</p>
                                       <button ng-click="casAuth()">ASU Log In</button>
                                   </div>
                               </div>
@@ -137,7 +141,6 @@
     var downbutton = $('#down-button');
 
     var scrollcount = 0;
-    home();
 
 /*
     //Firefox
@@ -222,7 +225,7 @@
 
     function home(){
       $('html, body').animate({
-          scrollTop: section1.offset().top
+          scrollTop: 0
       }, 500);
       upbutton.hide();
       downbutton.show();
